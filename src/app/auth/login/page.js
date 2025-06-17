@@ -23,7 +23,7 @@ const page = () => {
 
             <div className="forgot-password">
               <label>Password <span className="color-red">*</span></label>
-              <a onClick={() => router.push('/auth/forgot-password')} >Forgot Password?</a>
+              <a onClick={() => router.push('/auth/forgot-password')} href>Forgot Password?</a>
             </div>
             <div className="password-wrapper">
               <input type="password" placeholder="Password" />

@@ -65,8 +65,8 @@ const Navigation = () => {
                             </div>
 
                             {/* <!-- Auth Buttons --> */}
-                            <a onClick={() => router.push("/auth/login")} className="btn btn-outline-light btn-sm rounded-pill px-3 mt-2 mt-lg-0">Log in</a>
-                            <a onClick={() => router.push("/auth/sign-up")} className="btn btn-yellow btn-sm rounded-pill px-3 text-dark mt-2 mt-lg-0">Sign Up</a>
+                            <a href onClick={() => router.push("/auth/login")} className="btn btn-outline-light btn-sm rounded-pill px-3 mt-2 mt-lg-0">Log in</a>
+                            <a href onClick={() => router.push("/auth/sign-up")} className="btn btn-yellow btn-sm rounded-pill px-3 text-dark mt-2 mt-lg-0">Sign Up</a>
                         </div>
 
                     </div>

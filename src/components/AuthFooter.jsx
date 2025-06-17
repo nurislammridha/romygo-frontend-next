@@ -16,7 +16,7 @@ const AuthFooter = () => {
 
             {/* <!-- Footer --> */}
             <footer className="small">
-                <a onClick={() => router.push('/')} >Home</a>
+                <a onClick={() => router.push('/')} href>Home</a>
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms And Conditions</a>
                 <a href="#">Community Guidelines</a>

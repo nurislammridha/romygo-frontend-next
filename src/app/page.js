@@ -22,7 +22,7 @@ export default function Home() {
         <div className="hero-buttons mt-4 d-flex justify-content-center gap-3 flex-wrap" data-aos="zoom-in"
           data-aos-delay="400">
           <a href="#" className="btn btn-ride">Ride with romygo</a>
-          <a onClick={() => router.push('/driver')} className="btn btn-drive">Drive with romygo</a>
+          <a onClick={() => router.push('/driver')} className="btn btn-drive" href>Drive with romygo</a>
         </div>
       </section>
       {/* <!-- Drive Section (below hero) --> */}

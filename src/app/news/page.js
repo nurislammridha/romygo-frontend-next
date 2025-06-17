@@ -14,7 +14,7 @@ const page = () => {
             </section>
             <div class="container py-5 news-container" style={{ marginBottom: "20px" }}>
                 {/* <!-- Featured Post --> */}
-                <a onClick={() => router.push('/news-details')} >
+                <a onClick={() => router.push('/news-details')} href>
                     <div class="row mb-5">
                         <div class="col-lg-6">
                             <img src="/images/about.jpg" class="img-fluid rounded featured" alt="Featured" />
@@ -35,7 +35,7 @@ const page = () => {
                 <div class="row g-4">
                     {/* <!-- Post Item --> */}
                     <div class="col-md-4">
-                        <a onClick={() => router.push('/news-details')} >
+                        <a onClick={() => router.push('/news-details')} href>
                             <div class="post-card">
                                 <img src="/images/sec.jpg" alt="Post" />
                                 <div class="category">Engineering, Backend, Data / ML</div>
@@ -46,7 +46,7 @@ const page = () => {
                     </div>
 
                     <div class="col-md-4">
-                        <a onClick={() => router.push('/news-details')} >
+                        <a onClick={() => router.push('/news-details')} href>
                             <div class="post-card">
                                 <img src="/images/secAnother.jpg" alt="Post" />
                                 <div class="category">Engineering, Backend</div>
@@ -57,7 +57,7 @@ const page = () => {
                     </div>
 
                     <div class="col-md-4">
-                        <a onClick={() => router.push('/news-details')} >
+                        <a onClick={() => router.push('/news-details')} href>
                             <div class="post-card">
                                 <img src="/images/world.jpg" alt="Post" />
                                 <div class="category">Transit, Universities</div>
@@ -68,7 +68,7 @@ const page = () => {
                     </div>
 
                     <div class="col-md-4">
-                        <a onClick={() => router.push('/news-details')} >
+                        <a onClick={() => router.push('/news-details')} href>
                             <div class="post-card">
                                 <img src="/images/sec.jpg" alt="Post" />
                                 <div class="category">Engineering, Backend</div>
@@ -79,7 +79,7 @@ const page = () => {
                     </div>
 
                     <div class="col-md-4">
-                        <a onClick={() => router.push('/news-details')} >
+                        <a onClick={() => router.push('/news-details')} href>
                             <div class="post-card">
                                 <img src="/images/secAnother.jpg" alt="Post" />
                                 <div class="category">Engineering, Backend</div>
@@ -90,7 +90,7 @@ const page = () => {
                     </div>
 
                     <div class="col-md-4">
-                        <a onClick={() => router.push('/news-details')} >
+                        <a onClick={() => router.push('/news-details')} href>
                             <div class="post-card">
                                 <img src="/images/world.jpg" alt="Post" />
                                 <div class="category">Engineering, Backend</div>

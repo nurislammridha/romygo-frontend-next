@@ -43,7 +43,7 @@ const page = () => {
                             experiences.
                         </p>
 
-                        <a onClick={() => router.push('/news')} class="btn btn-theme mt-3">Back to Blog</a>
+                        <a onClick={() => router.push('/news')} class="btn btn-theme mt-3" href>Back to Blog</a>
                     </div>
                 </div>
             </div>
