@@ -1,16 +1,18 @@
 "use client";
+import { useLanguage } from '@/context/LanguageContext';
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react'
 
 const Navigation = () => {
     const router = useRouter();
     const pathname = usePathname();
+    const { language, changeLanguage, t } = useLanguage()
     const navItems = [
-        { name: 'Home', path: '/' },
-        { name: 'About romygo', path: '/about' },
-        { name: 'Become Driver', path: '/driver' },
-        { name: 'Investor', path: '/investor' },
-        { name: 'News', path: '/news' },
+        { name: t.home, path: '/' },
+        { name: t.aboutRomygo, path: '/about' },
+        { name: t.becomeDriver, path: '/driver' },
+        { name: t.investor, path: '/investor' },
+        { name: t.news, path: '/news' },
     ];
     return (
         <>
@@ -56,17 +58,37 @@ const Navigation = () => {
                                                 d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802" />
                                         </svg>
                                     </span>
-                                    EN
+                                    {language === 'en' ? 'EN' : 'RO'}
                                 </button>
                                 <ul className="dropdown-menu dropdown-menu-dark">
-                                    <li><a className="dropdown-item" href="#">EN - English</a></li>
-                                    <li><a className="dropdown-item" href="#">RO - Romanian</a></li>
+                                    <li>
+                                        <a
+                                            onClick={() => {
+                                                changeLanguage('en')
+                                            }}
+                                            className="dropdown-item"
+                                            href
+                                        >
+                                            EN - English
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            onClick={() => {
+                                                changeLanguage('ro')
+                                            }}
+                                            className="dropdown-item"
+                                            href
+                                        >
+                                            RO - Romanian
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
 
                             {/* <!-- Auth Buttons --> */}
-                            <a href onClick={() => router.push("/auth/login")} className="btn btn-outline-light btn-sm rounded-pill px-3 mt-2 mt-lg-0">Log in</a>
-                            <a href onClick={() => router.push("/auth/sign-up")} className="btn btn-yellow btn-sm rounded-pill px-3 text-dark mt-2 mt-lg-0">Sign Up</a>
+                            <a href onClick={() => router.push("/auth/login")} className="btn btn-outline-light btn-sm rounded-pill px-3 mt-2 mt-lg-0">{t.login}</a>
+                            <a href onClick={() => router.push("/auth/sign-up")} className="btn btn-yellow btn-sm rounded-pill px-3 text-dark mt-2 mt-lg-0">{t.signup}</a>
                         </div>
 
                     </div>

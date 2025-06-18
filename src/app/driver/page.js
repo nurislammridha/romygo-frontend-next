@@ -1,10 +1,12 @@
 "use client"
 import Footer from '@/components/Footer'
 import Navigation from '@/components/Navigation'
+import { useLanguage } from '@/context/LanguageContext'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 const page = () => {
+    const { language, t } = useLanguage();
     const router = useRouter();
     const [isReadOpen, setReadOpen] = useState(false);
     const [isSafetyOpen, setSafetyOpen] = useState(false);
@@ -27,12 +29,12 @@ const page = () => {
                 <Navigation />
                 {/* <!-- Optional hero content can go here --> */}
                 <div className="hero-content text-center">
-                    <h1>Make more with <strong className="romyGoText">romygo</strong></h1>
-                    <p>Drivers make the most amount of money on every ride.</p>
+                    <h1>{t.makeMoreWith} <strong className="romyGoText">romygo</strong></h1>
+                    <p>{t.driversmakeTheMostAmountOfMoney}</p>
                     {/* <!-- <a href="#" className="btn btn-drive">Apply to drive</a> --> */}
                     <div className="hero-buttons drive-buttons d-flex flex-wrap align-items-center justify-content-center gap-3"
                         data-aos="zoom-in" data-aos-delay="400">
-                        <a onClick={() => router.push('/auth/sign-up')} href className="btn btn-drive">Apply to drive</a>
+                        <a onClick={() => router.push('/auth/sign-up')} href className="btn btn-drive">{t.applyToDrive}</a>
                     </div>
                 </div>
             </section>
@@ -47,10 +49,9 @@ const page = () => {
 
                         {/* <!-- Text Column --> */}
                         <div className="col-md-6 drive-text text-center text-md-start">
-                            <h2 className="drive-title fw-bold mb-2" style={{ fontSize: "40px" }}>You keep what you make</h2>
+                            <h2 className="drive-title fw-bold mb-2" style={{ fontSize: "40px" }}>{t.youKeepWhatYouMake}</h2>
                             <p className="drive-description text-muted mb-2">
-                                romygo drivers take home 100% of what they earn. That's the only fair deal and we make it
-                                happen.
+                                {t.romygoDriversTakeHome}
                             </p>
 
                             {/* <!-- Mission Toggle Section --> */}
@@ -59,7 +60,7 @@ const page = () => {
                                     onClick={toggleRead}
                                     role='button'
                                 >
-                                    Read about romygo pay
+                                    {t.readAboutRomygoPay}
                                     <span className={`chevron ${isReadOpen ? 'rotate' : ''}`}>
                                         <i className={`fas fa-chevron-${isReadOpen ? 'up' : 'down'}`}></i>
                                     </span>
@@ -68,17 +69,11 @@ const page = () => {
                                     <div className="mission-subtitle-box mt-3">
                                         <div className="mission-subtitle-content">
                                             <p>
-                                                RomyGo Pay is built on a simple promise. What you earn is yours. Every time you
-                                                complete a ride, you receive the full fare and every tip without the platform taking
-                                                a single percentage. There are no hidden fees, no service charges, and no
-                                                deductions. You put in the work, so you deserve every leu.
+                                                {t.romygoPayIsBuildOnASimplePromise}
 
                                             </p>
                                             <p>
-                                                This is how ride sharing should be. Transparent, fair, and driver focused. With
-                                                RomyGo Pay, you are in control of your income from the first ride onward. Keep what
-                                                you earn, grow on your terms, and drive knowing you are backed by a platform that
-                                                respects your time.
+                                                {t.thisIsHowRideSharingShouldBe}
                                             </p>
 
                                             {/* <!-- <p><strong>This is just the beginning.</strong></p> --> */}
@@ -104,10 +99,9 @@ const page = () => {
 
                         {/* <!-- Text Column --> */}
                         <div className="drive-text text-center text-md-start mt-3">
-                            <h2 className="drive-title fw-bold mb-2" style={{ fontSize: "40px" }}>We keep it safe</h2>
+                            <h2 className="drive-title fw-bold mb-2" style={{ fontSize: "40px" }}>{t.weKeepIsSafe}</h2>
                             <p className="drive-description text-muted mb-2">
-                                romygo is building a community of drivers, riders and corporate to deliver a spectacular
-                                experience for everyone in Romania.
+                                {t.romygoIsBuildingACommunityOfDrivers}
                             </p>
 
                             {/* <!-- Mission Toggle Section --> */}
@@ -116,7 +110,7 @@ const page = () => {
                                     onClick={toggleSafety}
                                     role='button'
                                 >
-                                    Read our safety guidelines
+                                    {t.radOurSafetyGuidelines}
                                     <span className={`chevron ${isSafetyOpen ? 'rotate' : ''}`}>
                                         <i className={`fas fa-chevron-${isSafetyOpen ? 'up' : 'down'}`}></i>
                                     </span>
@@ -126,43 +120,21 @@ const page = () => {
                                         style={{ backgroundColor: "#faf8c9" }}>
                                         <div className="mission-subtitle-content">
                                             <p>
-                                                We are romygo. Built for those who move the world forward. For the early starters,
-                                                the late-night earners,
-                                                and the everyday movers and shakers. We exist to connect people, places, and
-                                                possibilities simply,
-                                                instantly, and with purpose.
+                                                {t.weAreRomygo}
                                             </p>
                                             <p>
-                                                Movement isn’t just what we enable, it’s what defines us. It’s the engine behind
-                                                every ride, every delivery,
-                                                every choice to show up and make something happen. From small towns to big cities,
-                                                romygo empowers individuals
-                                                to take control of their time, their income, and their direction.
+                                                {t.movementIsNtJust}
                                             </p>
                                             <p>
-                                                We’re a technology company grounded in reality where each tap has real-world impact.
-                                                We bring together speed,
-                                                safety, and simplicity to help people get where they need to be and earn more while
-                                                doing it. And we’re building
-                                                this not just for convenience, but for inclusion because freedom of movement and
-                                                opportunity should belong to
-                                                everyone. The opportunity to earn more, relax more and be happy more.
+                                                {t.weareTechnologyCompany}
                                             </p>
                                             <p>
-                                                Our platform isn’t about products – it’s about people. Drivers who earn with
-                                                dignity. Riders who travel with trust.
-                                                Families who get what they need without delay. We’re here for real-life needs, in
-                                                real time, from a quick lift to
-                                                a crucial delivery.
+                                                {t.ourPlatformIsNtAboutProducts}
                                             </p>
                                             <p>
-                                                We haven’t come this far by standing still. romygo was built on momentum – on asking
-                                                what’s next, what’s better,
-                                                what’s possible. That spirit of reinvention fuels everything we do. Every line of
-                                                code. Every support call. Every
-                                                new city we launch.
+                                                {t.wehaventComeThisFar}
                                             </p>
-                                            <p><strong>This is just the beginning.</strong></p>
+                                            <p><strong>{t.thisIsJustTheBegining}</strong></p>
                                         </div>
                                     </div>
                                 )}
@@ -185,13 +157,12 @@ const page = () => {
                         {/* <!-- Text Column --> */}
                         <div className="col-md-6 drive-text text-center text-md-start">
                             <h2 className="drive-title fw-bold mb-3">
-                                Make more money today</h2>
+                                {t.makeMoreMoneyToday}</h2>
                             <p className="drive-description text-muted mb-4">
-                                Drive with romygo and join our community of happy drivers who take 100% of what they make
-                                everyday.
+                                {t.driveWithRomygoAndJoinOurCommunity}
                             </p>
                             <div className="drive-buttons d-flex flex-wrap align-items-center gap-3">
-                                <a onClick={() => router.push('/auth/sign-up')} href className="btn btn-drive">Apply Here</a>
+                                <a onClick={() => router.push('/auth/sign-up')} href className="btn btn-drive">{t.applyHere}</a>
 
                             </div>
                         </div>

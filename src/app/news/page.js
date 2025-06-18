@@ -1,10 +1,12 @@
 "use client"
 import Footer from '@/components/Footer'
 import Navigation from '@/components/Navigation'
+import { useLanguage } from '@/context/LanguageContext';
 import { useRouter } from 'next/navigation';
 import React from 'react'
 
 const page = () => {
+    const { language, t } = useLanguage();
     const router = useRouter();
     return (
         <>
@@ -103,7 +105,7 @@ const page = () => {
                 </div>
 
                 <div class="text-center mt-5">
-                    <a href="#" class="btn btn-outline-dark btn-theme">View more stories</a>
+                    <a href="#" class="btn btn-outline-dark btn-theme">{t.viewMoreStories}</a>
                 </div>
             </div>
             <Footer />

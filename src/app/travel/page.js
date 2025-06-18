@@ -1,8 +1,12 @@
+"use client"
 import Footer from '@/components/Footer'
 import Navigation from '@/components/Navigation'
+import { useLanguage } from '@/context/LanguageContext'
 import React from 'react'
-
+// import { useLanguage } from '@/context/LanguageContext';
 const page = () => {
+    // const { language, t } = useLanguage();
+    const { t } = useLanguage();
     return (
         <>
             {/* <!-- Hero Section --> */}
@@ -15,8 +19,8 @@ const page = () => {
                 <Navigation />
                 {/* <!-- Optional hero content can go here --> */}
                 <div class="hero-content text-center invest-center">
-                    <h1>Travel with <strong class="romyGoText">romygo</strong></h1>
-                    <p>Online travel booking coming soon</p>
+                    <h1>{t.travelWith} <strong class="romyGoText">romygo</strong></h1>
+                    <p>{t.onlineTravelBooking}</p>
                 </div>
             </section>
             <Footer />

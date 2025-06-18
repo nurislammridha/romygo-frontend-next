@@ -2,10 +2,12 @@
 
 import Footer from '@/components/Footer';
 import Navigation from '@/components/Navigation';
+import { useLanguage } from '@/context/LanguageContext';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 export default function Home() {
   const router = useRouter();
+  const { language, t } = useLanguage()
   return (
     <>
       {/* <!-- Hero Section --> */}
@@ -16,13 +18,13 @@ export default function Home() {
         {/* <!-- Hero Text --> */}
 
         <div className="container text-center hero-text" data-aos="fade-up" data-aos-delay="200">
-          Get moving in Romania with<br /><strong className="romyGoText">romygo</strong>
+          {t.getMovingInRomaniaWith}<br /><strong className="romyGoText">romygo</strong>
         </div>
 
         <div className="hero-buttons mt-4 d-flex justify-content-center gap-3 flex-wrap" data-aos="zoom-in"
           data-aos-delay="400">
-          <a href="#" className="btn btn-ride">Ride with romygo</a>
-          <a onClick={() => router.push('/driver')} className="btn btn-drive" href>Drive with romygo</a>
+          <a href="#" className="btn btn-ride">{t.rideWithRomygo}</a>
+          <a onClick={() => router.push('/driver')} className="btn btn-drive" href>{t.driveWithRomygo}</a>
         </div>
       </section>
       {/* <!-- Drive Section (below hero) --> */}
@@ -37,16 +39,14 @@ export default function Home() {
 
             {/* <!-- Text Column --> */}
             <div className="col-md-6 drive-text">
-              <h2 className="drive-title fw-bold mb-3">Drive when you want, keep all you make.</h2>
+              <h2 className="drive-title fw-bold mb-3">{t.driveWhenYouWantKeepAllYouMake}</h2>
               <p className="drive-description text-muted mb-3">
-                Drive or deliver on your own schedule, using your own vehicle.
-                Choose the type of work that suits you — rides, deliveries, or both.
-                with romygo, you keep 100% of what you earn.
+                {t.driveOrDeliverOn}
               </p>
               <div className="drive-buttons d-flex flex-wrap align-items-center gap-3">
-                <a onClick={() => router.push('/auth/sign-up')} href className="btn btn-drive">Get Started</a>
+                <a onClick={() => router.push('/auth/sign-up')} href className="btn btn-drive">{t.getStarted}</a>
                 <p className="mb-0 drive-link-text">
-                  <a onClick={() => router.push('/auth/login')} href className="sign-in-link">Already have an account? Sign In</a>
+                  <a onClick={() => router.push('/auth/login')} href className="sign-in-link">{t.alreadyHaveAnAccount}</a>
                 </p>
               </div>
             </div>
@@ -60,15 +60,14 @@ export default function Home() {
           <div className="row align-items-center flex-column flex-md-row gap-4 gap-md-0">
             {/* <!-- Text Column --> */}
             <div className="col-md-6 drive-text">
-              <h2 className="drive-title fw-bold mb-3">The romygo you know, reimagined for business</h2>
+              <h2 className="drive-title fw-bold mb-3">{t.theRomygoYouKnow}</h2>
               <p className="drive-description text-muted mb-3">
-                romygo allows you to maintain complete control over your schedule, rides and earnings. Heck,
-                we'll help you with your taxes too!
+                {t.romygoAllowsYouToMaintain}
               </p>
               <div className="drive-buttons d-flex flex-wrap align-items-center gap-3">
-                <a onClick={() => router.push('/auth/sign-up')} href className="btn btn-drive">Get Started</a>
+                <a onClick={() => router.push('/auth/sign-up')} href className="btn btn-drive">{t.getStarted}</a>
                 <p className="mb-0 drive-link-text">
-                  <a onClick={() => router.push('/auth/login')} href className="sign-in-link">Already have an account? Sign In</a>
+                  <a onClick={() => router.push('/auth/login')} href className="sign-in-link">{t.alreadyHaveAnAccount}</a>
                 </p>
               </div>
             </div>
@@ -89,8 +88,8 @@ export default function Home() {
           <div className="col-12 col-md-6">
             <div className="download-card">
               <div className="download-text">
-                <h5>Download the rider app</h5>
-                <p>Scan to download</p>
+                <h5>{t.downloadTheRiderApp}</h5>
+                <p>{t.scanToDownload}</p>
               </div>
               <img src="/images/qr.png" alt="Rider App QR" className="qr-img" />
 
@@ -102,8 +101,8 @@ export default function Home() {
             <div className="download-card">
               <img src="/images/qr.png" alt="Driver App QR" className="qr-img" />
               <div className="download-text">
-                <h5>Download the driver app</h5>
-                <p>Scan to download</p>
+                <h5>{t.downloadTheDriverApp}</h5>
+                <p>{t.scanToDownload}</p>
               </div>
             </div>
           </div>
@@ -116,13 +115,13 @@ export default function Home() {
             <div className="custom-card d-flex justify-content-between align-items-center flex-column flex-lg-row">
               <div>
                 <h3 className="fw-bold mb-2">
-                  From Underdog to Global Leader<br />
-                  A Journey of Growth and Innovation.
+                  {t.fromUnderdogToGlobalLeader}<br />
+                  {t.aJourneyOfGrowthAndInnovation}
                 </h3>
                 <p className="mb-3">
-                  Discover how romygo reinvented the rideshare industry in Romania one ride at a time.
+                  {t.discoverHowRomygoReinvented}
                 </p>
-                <button className="download-btn">Download the app</button>
+                <button className="download-btn">{t.downloadTheApp}</button>
               </div>
               <div>
                 <img src="/images/smart.png" alt="Download the app" className="download-image" />

@@ -3,7 +3,9 @@ import React from 'react'
 import AuthFooter from '@/components/AuthFooter';
 import { useRouter } from 'next/navigation';
 import '../authStyles.css'; // Assuming you have a CSS file for styles
+import { useLanguage } from '@/context/LanguageContext';
 const page = () => {
+    const { language, t } = useLanguage();
     const router = useRouter();
     return (
         <div className="auth-container">
@@ -14,51 +16,50 @@ const page = () => {
 
                 <div className="form-box">
                     <div className="form-top">
-                        <h2>Drive with romygo</h2>
-                        <p>Become romygo driver and make more money today.</p>
+                        <h2>{t.driveWithRomygo}</h2>
+                        <p>{t.becomeRomygoDrivermakeMoreMoneyToday}</p>
                     </div>
 
                     <div className="form-bottom">
 
-                        <label>Role <span className="color-red">*</span></label>
+                        <label>{t.role} <span className="color-red">*</span></label>
                         <div className="role-buttons">
                             <button type="button" className="role-btn active" data-role="Gym">
-                                <i className="fas fa-check-circle"></i> Driver
+                                <i className="fas fa-check-circle"></i> {t.driver}
                             </button>
 
                         </div>
 
-                        <label>Name <span className="color-red">*</span></label>
-                        <input type="text" placeholder="Name" />
+                        <label>{t.name} <span className="color-red">*</span></label>
+                        <input type="text" placeholder={t.name} />
 
-                        <label>Email <span className="color-red">*</span></label>
-                        <input type="email" placeholder="Email" />
+                        <label>{t.email} <span className="color-red">*</span></label>
+                        <input type="email" placeholder={t.email} />
 
-                        <label>Password <span className="color-red">*</span></label>
+                        <label>{t.password} <span className="color-red">*</span></label>
                         <div className="password-wrapper">
-                            <input type="password" placeholder="Password" />
+                            <input type="password" placeholder={t.password} />
                             <div className="password-toggle"><i className="fas fa-eye"></i></div>
                         </div>
                         <ul className="password-rules">
-                            <li>At least 8 characters</li>
-                            <li>At least one uppercase letter</li>
-                            <li>At least one lowercase letter</li>
-                            <li>At least one number</li>
-                            <li>At least one special character</li>
+                            <li>{t.atleasteightCharacter}</li>
+                            <li>{t.atLeastOneUppercase}</li>
+                            <li>{t.atLeastOneLowerCas}</li>
+                            <li>{t.atLeastoneNumber}</li>
+                            <li>{t.atLeastOneSpecialCharacter}</li>
                         </ul>
 
-                        <label>Confirm Password <span className="color-red">*</span></label>
+                        <label>{t.confirmPassword} <span className="color-red">*</span></label>
                         <div className="password-wrapper">
-                            <input type="password" placeholder="Confirm Password" />
+                            <input type="password" placeholder={t.confirmPassword} />
                             <div className="password-toggle"><i className="fas fa-eye"></i></div>
                         </div>
 
                         <div className="form-footer">
-                            By clicking "Sign Up" I agree to Gymscanner's <a href="#">Terms Of Use</a> and <a href="#">Privacy
-                                Policy</a>
+                            {t.byClickingSignUp} <a href="#">{t.termsOfUse}</a> {t.and} <a href="#">{t.privacyPolicy}</a>
                         </div>
-                        <button className="submit-btn"><i className="fas fa-check-circle"></i> Sign Up</button>
-                        <div className="form-footer">Already have an account? <a onClick={() => router.push('/auth/login')} >Sign In here</a></div>
+                        <button className="submit-btn"><i className="fas fa-check-circle"></i> {t.signUp}</button>
+                        <div className="form-footer"> {t.alreadyHaveAn} <a onClick={() => router.push('/auth/login')} >{t.signInHere}</a></div>
                     </div>
                 </div>
                 <AuthFooter />

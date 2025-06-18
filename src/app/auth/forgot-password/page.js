@@ -4,7 +4,9 @@ import '../authStyles.css'; // Assuming you have a CSS file for styles
 import AuthFooter from '@/components/AuthFooter';
 import { useRouter } from 'next/navigation';
 import '../authStyles.css'; // Assuming you have a CSS file for styles
+import { useLanguage } from '@/context/LanguageContext';
 const page = () => {
+  const { language, t } = useLanguage();
   const router = useRouter();
   return (
     <div className="auth-container">
@@ -14,15 +16,15 @@ const page = () => {
         </a>
         <div className="form-box">
           <div className="form-top">
-            <h2>Forgot Password</h2>
-            <p>Enter your email to receive a password reset link</p>
+            <h2>{t.forgotPassword}</h2>
+            <p>{t.enterYourEmailToReceive}</p>
           </div>
 
           <div className="form-bottom">
-            <label>Email <span className="color-red">*</span></label>
-            <input type="email" placeholder="Email" />
-            <button className="submit-btn"><i className="fas fa-check-circle"></i> Email Password Reset Link</button>
-            <div className="form-footer">Return to <a href="#">Sign In</a></div>
+            <label>{t.email} <span className="color-red">*</span></label>
+            <input type="email" placeholder={t.email} />
+            <button className="submit-btn"><i className="fas fa-check-circle"></i> {t.emailPasswordResetLink}</button>
+            <div className="form-footer">{t.returnTo} <a href="#">{t.signIn}</a></div>
           </div>
         </div>
 
