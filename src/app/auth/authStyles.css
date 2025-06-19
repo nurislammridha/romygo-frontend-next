@@ -232,10 +232,31 @@ display: flex;
 justify-content: space-between;
 /* align-items: center; */
 }
+.input-error {
+  border: 1px solid red !important;
+}
+.error-text {
+  color: red !important;
+  font-size: 14px !important;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+.password-rules li {
+  color: red;
+}
+.password-rules .rule-passed {
+  color: green;
+  font-weight: bold;
+}
+
  .custom-check:checked {
     background-color: #fed847;
     border-color: #fed847;
   }
+.resend-btn:hover {
+  text-decoration: underline;
+}
+
     @media (max-width: 768px) {
       .right-section {
         display: none;

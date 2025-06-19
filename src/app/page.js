@@ -3,8 +3,10 @@
 import Footer from '@/components/Footer';
 import Navigation from '@/components/Navigation';
 import { useLanguage } from '@/context/LanguageContext';
+import { showToast } from '@/utils/ToastHelper';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
 export default function Home() {
   const router = useRouter();
   const { language, t } = useLanguage()

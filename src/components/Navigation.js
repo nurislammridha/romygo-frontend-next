@@ -1,11 +1,13 @@
 "use client";
 import { useLanguage } from '@/context/LanguageContext';
+import { showToast } from '@/utils/ToastHelper';
 import { usePathname, useRouter } from 'next/navigation';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Navigation = () => {
     const router = useRouter();
     const pathname = usePathname();
+    const [isLogin, setLogin] = useState(false)
     const { language, changeLanguage, t } = useLanguage()
     const navItems = [
         { name: t.home, path: '/' },
@@ -14,6 +16,17 @@ const Navigation = () => {
         { name: t.investor, path: '/investor' },
         { name: t.news, path: '/news' },
     ];
+    const handleLogout = () => {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("user");
+        localStorage.removeItem("access_token");
+        setLogin(false);
+        showToast("success", "Logout successful");
+    }
+    useEffect(() => {
+        localStorage.getItem("isLoggedIn") === "true" ? setLogin(true) : setLogin(false)
+    }, [])
+
     return (
         <>
             <header className="navbar navbar-expand-lg fixed-top smart-navbar">
@@ -87,8 +100,13 @@ const Navigation = () => {
                             </div>
 
                             {/* <!-- Auth Buttons --> */}
-                            <a href onClick={() => router.push("/auth/login")} className="btn btn-outline-light btn-sm rounded-pill px-3 mt-2 mt-lg-0">{t.login}</a>
-                            <a href onClick={() => router.push("/auth/sign-up")} className="btn btn-yellow btn-sm rounded-pill px-3 text-dark mt-2 mt-lg-0">{t.signup}</a>
+                            {!isLogin ? (<>
+                                <a href onClick={() => router.push("/auth/login")} className="btn btn-outline-light btn-sm rounded-pill px-3 mt-2 mt-lg-0">{t.login}</a>
+                                <a href onClick={() => router.push("/auth/sign-up")} className="btn btn-yellow btn-sm rounded-pill px-3 text-dark mt-2 mt-lg-0">{t.signup}</a>
+                            </>) : (
+                                <a href onClick={() => handleLogout()} className="btn btn-outline-light btn-sm rounded-pill px-3 mt-2 mt-lg-0">{t.logout}</a>
+                            )}
+
                         </div>
 
                     </div>
