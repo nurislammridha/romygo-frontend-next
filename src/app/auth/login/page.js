@@ -141,6 +141,7 @@ const page = () => {
       </div>
 
       <div className="right-section right-login">
+        <img src="/images/login.jpg" alt="Sign Up" className="auth-image" />
       </div>
     </div>
 

@@ -24,7 +24,7 @@ const page = () => {
             <label>{t.email} <span className="color-red">*</span></label>
             <input type="email" placeholder={t.email} />
             <button className="submit-btn"><i className="fas fa-check-circle"></i> {t.emailPasswordResetLink}</button>
-            <div className="form-footer">{t.returnTo} <a href="#">{t.signIn}</a></div>
+            <div className="form-footer">{t.returnTo} <a href onClick={() => router.push('/auth/login')}>{t.signIn}</a></div>
           </div>
         </div>
 
@@ -32,7 +32,7 @@ const page = () => {
       </div>
 
       <div className="right-section right-forgot">
-
+        <img src="/images/passwordReset.jpg" alt="Sign Up" className="auth-image" />
       </div>
     </div>
   )

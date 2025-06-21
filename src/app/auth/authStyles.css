@@ -167,18 +167,28 @@ input[type="password"]:focus {
     }
 
 .right-section {
-      background: url('/images/ban.jpg') center center / cover no-repeat;
+      /* background: url('/images/ban.jpg') center center / cover no-repeat; */
       display: flex;
       justify-content: center;
       align-items: center;
       color: white;
       height: 100vh;
+      position: relative;
+    }
+    .auth-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      /* z-index: -1; */
     }
 .right-login {
-      background: url('/images/login.jpg') center center / cover no-repeat !important;
+      /* background: url('/images/login.jpg') center center / cover no-repeat !important; */
     }
 .right-forgot {
-      background: url('/images/passwordReset.jpg') center center / cover no-repeat !important;
+      /* background: url('/images/passwordReset.jpg') center center / cover no-repeat !important; */
     }
 .right-banner-text {
       background-color: rgba(0, 0, 0, 0.7);

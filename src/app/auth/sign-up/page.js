@@ -224,13 +224,15 @@ const page = () => {
                         </button>
                         <div className="form-footer">
                             {t.alreadyHaveAn}
-                            <a onClick={() => router.push('/auth/login')} >{t.signInHere}</a>
+                            <a onClick={() => router.push('/auth/login')} className='ms-1'>{t.signInHere}</a>
                         </div>
                     </form>
                 </div>
                 <AuthFooter />
             </div>
-            <div className="right-section"> </div>
+            <div className="right-section">
+                <img src="/images/ban.jpg" alt="Sign Up" className="auth-image" />
+            </div>
         </div>
         <ToastContainer />
     </>)

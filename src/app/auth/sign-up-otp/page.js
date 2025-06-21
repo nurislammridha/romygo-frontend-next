@@ -187,7 +187,9 @@ const Page = () => {
                 </div>
                 <AuthFooter />
             </div>
-            <div className="right-section"></div>
+            <div className="right-section">
+                <img src="/images/forgotPassword.jpg" alt="Sign Up" className="auth-image" />
+            </div>
         </div>
         <ToastContainer />
     </>
