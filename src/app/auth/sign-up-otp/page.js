@@ -88,9 +88,11 @@ const Page = () => {
                                     console.error("Error during sign up:", error);
                                 })
                         } else {
+                            setLoading(true);
                             showToast("error", res.data.message || "Failed to verify OTP");
                         }
                     }).catch((error) => {
+
                         setLoading(false);
                         showToast("error", error?.response?.data?.message || "An error occurred during OTP verification");
                         console.error("Error during sign up:", error);
