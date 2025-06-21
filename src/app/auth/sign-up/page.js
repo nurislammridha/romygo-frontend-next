@@ -51,7 +51,14 @@ const page = () => {
         if (!form.name.trim()) {
             newErrors.name = "Name should not be empty";
         }
-
+        if (!form.email.trim()) {
+            newErrors.email = "Email should not be empty";
+        } else {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(form.email)) {
+                newErrors.email = "Email is invalid";
+            }
+        }
         // Phone validation (simple pattern)
         const phonePattern = /^[0-9]{10,15}$/;
         if (!form.phone.trim()) {
@@ -167,7 +174,7 @@ const page = () => {
                         />
                         {errors.phone && <p className="error-text">{errors.phone}</p>}
 
-                        <label>{t.email}</label>
+                        <label>{t.email} <span className="color-red">*</span></label>
                         <input
                             type="email"
                             placeholder={t.email}
