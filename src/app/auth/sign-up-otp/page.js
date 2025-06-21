@@ -82,13 +82,17 @@ const Page = () => {
                                         localStorage.setItem("access_token", res?.data?.data?.token);
                                         localStorage.setItem("isLoggedIn", true);
                                     } else {
+                                        setLoading(false);
                                         showToast("error", res.data.message || "Failed to sign up");
                                     }
                                 }).catch((error) => {
+                                    setLoading(false);
+                                    showToast("error", error?.response?.data?.message || "An error occurred during sign up");
+                                    // Handle error (e.g., show a notification)
                                     console.error("Error during sign up:", error);
                                 })
                         } else {
-                            setLoading(true);
+                            setLoading(false);
                             showToast("error", res.data.message || "Failed to verify OTP");
                         }
                     }).catch((error) => {
@@ -190,7 +194,7 @@ const Page = () => {
                 <AuthFooter />
             </div>
             <div className="right-section">
-                <img src="/images/forgotPassword.jpg" alt="Sign Up" className="auth-image" />
+                <img src="/images/ban.jpg" alt="Sign Up" className="auth-image" />
             </div>
         </div>
         <ToastContainer />
