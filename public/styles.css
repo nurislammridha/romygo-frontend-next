@@ -11,7 +11,10 @@ body {
   overflow-x: hidden;
 }
 a{cursor: pointer;}
-
+/* styles/globals.css or scoped CSS module */
+.shadow-sm {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
 /* Hero Section with background */
 .hero-section {
   background: url('/images/bg.jpg') no-repeat center center;
@@ -69,7 +72,7 @@ a{cursor: pointer;}
   color: #fed847;
   background-color: transparent;
 }
-
+.act-dash{color: #fed847 !important;}
 /* Toggler icon */
 .navbar-toggler-icon {
   filter: invert(1);

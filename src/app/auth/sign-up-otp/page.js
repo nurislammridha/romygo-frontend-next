@@ -12,7 +12,7 @@ import { showToast } from "@/utils/ToastHelper";
 const Page = () => {
     const { language, t } = useLanguage();
     const router = useRouter();
-    let duration = 5; // 2 minutes in seconds
+    let duration = 60; // 2 minutes in seconds
     const [form, setForm] = useState({ otp: "" });
     const [isLoading, setLoading] = useState(false);
     const [isResendLoading, setResendLoading] = useState(false);
@@ -91,10 +91,14 @@ const Page = () => {
                             showToast("error", res.data.message || "Failed to verify OTP");
                         }
                     }).catch((error) => {
+                        setLoading(false);
+                        showToast("error", error?.response?.data?.message || "An error occurred during OTP verification");
                         console.error("Error during sign up:", error);
                     })
             } catch (error) {
-                console.error("Error during sign up:", error);
+                setLoading(false);
+                showToast("error", "An error occurred during sign up");
+                console.error("Error during otp", error);
                 // Handle error (e.g., show a notification)
             }
         }

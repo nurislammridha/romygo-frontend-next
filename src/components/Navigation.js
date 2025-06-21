@@ -4,7 +4,7 @@ import { showToast } from '@/utils/ToastHelper';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
-const Navigation = () => {
+const Navigation = ({ user = null }) => {
     const router = useRouter();
     const pathname = usePathname();
     const [isLogin, setLogin] = useState(false)
@@ -104,9 +104,11 @@ const Navigation = () => {
                                 <a href onClick={() => router.push("/auth/login")} className="btn btn-outline-light btn-sm rounded-pill px-3 mt-2 mt-lg-0">{t.login}</a>
                                 <a href onClick={() => router.push("/auth/sign-up")} className="btn btn-yellow btn-sm rounded-pill px-3 text-dark mt-2 mt-lg-0">{t.signup}</a>
                             </>) : (
-                                <a href onClick={() => handleLogout()} className="btn btn-outline-light btn-sm rounded-pill px-3 mt-2 mt-lg-0">{t.logout}</a>
+                                <a href onClick={() => router.push("/dashboard")} >
+                                    <img src={user && user?.logo} alt="User Avatar" className="rounded-circle" width="32" height="32" />
+                                </a>
                             )}
-
+                            {/* <a href onClick={() => handleLogout()} className="btn btn-outline-light btn-sm rounded-pill px-3 mt-2 mt-lg-0">{t.logout}</a> */}
                         </div>
 
                     </div>

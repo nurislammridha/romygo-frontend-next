@@ -67,9 +67,12 @@ const page = () => {
               showToast("error", res.data.message || "Failed to login");
             }
           }).catch((error) => {
-            console.error("Error during sign up:", error);
+            setLoading(false);
+            showToast("error", error?.response?.data?.message || "An error occurred during login");
+            console.error("Error during .catch", error);
           })
       } catch (error) {
+        setLoading(false);
         console.error("Error during sign up:", error);
         // Handle error (e.g., show a notification)
       }
