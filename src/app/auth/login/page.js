@@ -59,7 +59,8 @@ const page = () => {
             setLoading(false);
             if (res.data.success) {
               showToast("success", "Login successfully");
-              router.push('/');
+              // router.push('/');
+              router.push(`https://app.romygo.com/authenticate?token=${encodeURIComponent(res?.data?.data?.token)}`);
               localStorage.setItem("user", JSON.stringify(res?.data?.data?.user));
               localStorage.setItem("access_token", res?.data?.data?.token);
               localStorage.setItem("isLoggedIn", true);

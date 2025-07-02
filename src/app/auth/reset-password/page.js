@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AuthFooter from '@/components/AuthFooter';
 import { useRouter } from 'next/navigation';
 import '../authStyles.css'; // Assuming you have a CSS file for styles
@@ -12,10 +12,9 @@ const page = () => {
     const dispatch = useDispatch();
     const { language, t } = useLanguage();
     const router = useRouter();
+    const [email, setEmail] = useState("")
+    const [otp, setOtp] = useState("")
     const [form, setForm] = useState({
-        name: "",
-        phone: "",
-        email: "",
         password: "",
         confirmPassword: "",
     });
@@ -46,26 +45,6 @@ const page = () => {
     };
     const validate = () => {
         const newErrors = {};
-
-        // Name validation
-        if (!form.name.trim()) {
-            newErrors.name = "Name should not be empty";
-        }
-        if (!form.email.trim()) {
-            newErrors.email = "Email should not be empty";
-        } else {
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
-            if (!emailPattern.test(form.email)) {
-                newErrors.email = "Email is invalid";
-            }
-        }
-        // Phone validation (simple pattern)
-        const phonePattern = /^[0-9]{10,15}$/;
-        if (!form.phone.trim()) {
-            newErrors.phone = "Phone should not be empty";
-        } else if (!phonePattern.test(form.phone)) {
-            newErrors.phone = "Phone number is invalid";
-        }
 
         // Password rules check
         const { password } = form;
@@ -110,13 +89,11 @@ const page = () => {
             setErrors({});
             setLoading(true);
             try {
-                const res = await axios.post('https://app.romygo.com/api/v1/send-otp', { phone: form.phone });
-
-                localStorage.setItem("signup", JSON.stringify(form));
+                const res = await axios.post('https://app.romygo.com/api/v1/reset-password', { email, otp, new_password: form.password });
 
                 if (res.data.success) {
-                    showToast("success", "OTP sent successfully");
-                    router.push('/auth/sign-up-otp');
+                    showToast("success", "Password change successfully");
+                    router.push('/auth/login');
                 } else {
                     showToast("error", res.data.message || "Failed to send OTP");
                 }
@@ -136,6 +113,10 @@ const page = () => {
 
         }
     };
+    useEffect(() => {
+        setEmail(localStorage.getItem('email'))
+        setOtp(localStorage.getItem('otp'))
+    }, [])
 
     return (<>
         <div className="auth-container">
@@ -146,53 +127,13 @@ const page = () => {
 
                 <div className="form-box">
                     <div className="form-top">
-                        <h2>{t.driveWithRomygo}</h2>
-                        <p>{t.becomeRomygoDrivermakeMoreMoneyToday}</p>
+                        <h2>{t.forgotPassword}</h2>
+                        <p>Generate new password</p>
                     </div>
 
                     <form className="form-bottom" onSubmit={handleSubmit}>
 
-                        <label>{t.role} <span className="color-red">*</span></label>
-                        <div className="role-buttons">
-                            <button type="button" className="role-btn active" data-role="Gym">
-                                <i className="fas fa-check-circle"></i> {t.driver}
-                            </button>
-
-                        </div>
-
-                        <label>{t.name} <span className="color-red">*</span></label>
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder={t.name}
-                            value={form.name}
-                            onChange={handleChange}
-                            className={errors.name ? "input-error" : ""}
-                        />
-                        {errors.name && <p className="error-text">{errors.name}</p>}
-                        <label>{"Phone"} <span className="color-red">*</span></label>
-                        <input
-                            type="text"
-                            placeholder={"Phone"}
-                            value={form.phone}
-                            onChange={handleChange}
-                            className={errors.phone ? "input-error" : ""}
-                            name="phone"
-                        />
-                        {errors.phone && <p className="error-text">{errors.phone}</p>}
-
-                        <label>{t.email} <span className="color-red">*</span></label>
-                        <input
-                            type="email"
-                            placeholder={t.email}
-                            value={form.email}
-                            onChange={handleChange}
-                            className={errors.email ? "input-error" : ""}
-                            name="email"
-                        />
-                        {errors.email && <p className="error-text">{errors.email}</p>}
-
-                        <label>{t.password} <span className="color-red">*</span></label>
+                        <label>New Password <span className="color-red">*</span></label>
                         <div className="password-wrapper">
                             <input
                                 type={passwordView ? "text" : "password"}
@@ -227,25 +168,20 @@ const page = () => {
                             <div onClick={() => setConfirmPasswordView((val) => !val)} className="password-toggle"><i className={`fas fa-eye${confirmPasswordView ? "-slash" : ""}`}></i></div>
                         </div>
                         {errors.confirmPassword && <p className="error-text" style={{ marginTop: 10 }}>{errors.confirmPassword}</p>}
-                        <div className="form-footer">
-                            {t.byClickingSignUp} <a href="#">{t.termsOfUse}</a> {t.and} <a href="#">{t.privacyPolicy}</a>
-                        </div>
+
                         <button
                             type='submit'
                             className="submit-btn">
                             {isLoading ? <div class="spinner-border spinner-border-sm me-2"></div> : <i className="fas fa-check-circle me-2"></i>}
-                            {t.signUp}
+                            Submit
                         </button>
-                        <div className="form-footer">
-                            {t.alreadyHaveAn}
-                            <a onClick={() => router.push('/auth/login')} className='ms-1'>{t.signInHere}</a>
-                        </div>
+
                     </form>
                 </div>
                 <AuthFooter />
             </div>
-            <div className="right-section">
-                <img src="/images/ban.jpg" alt="Sign Up" className="auth-image" />
+            <div className="right-section right-forgot">
+                <img src="/images/passwordReset.jpg" alt="Sign Up" className="auth-image" />
             </div>
         </div>
         {/* <ToastContainer /> */}

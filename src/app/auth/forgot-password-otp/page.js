@@ -16,7 +16,7 @@ const Page = () => {
     const [form, setForm] = useState({ otp: "" });
     const [isLoading, setLoading] = useState(false);
     const [isResendLoading, setResendLoading] = useState(false);
-    const [signup, setSignup] = useState({});
+    const [email, setEmail] = useState({});
     const [errors, setErrors] = useState({});
     const [secondsLeft, setSecondsLeft] = useState(duration); // 2 minutes
     const [showResend, setShowResend] = useState(false);
@@ -32,7 +32,7 @@ const Page = () => {
         }
     }, [secondsLeft]);
     useEffect(() => {
-        setSignup(JSON.parse(localStorage.getItem("signup")) || {});
+        setEmail(localStorage.getItem('email' || null));
     }, [])
 
     const handleChange = (e) => {
@@ -44,22 +44,14 @@ const Page = () => {
         const newErrors = {};
         if (!form.otp.trim()) {
             newErrors.otp = "Otp should not be empty";
-        } else if (form.otp.length !== 4) {
-            newErrors.otp = "Otp must be 4 characters long";
+        } else if (form.otp.length !== 6) {
+            newErrors.otp = "Otp must be 6 characters long";
         }
         return newErrors;
     };
 
     const handleSubmit = (e) => {
-        const postData = {
-            phone: signup.phone,
-            name: signup.name,
-            email: signup.email,
-            password: signup.password,
-            dob: "2014-12-31",
-            gender: "Male",
-            role: "Driver"
-        }
+
         e.preventDefault();
         const validationErrors = validate();
         if (Object.keys(validationErrors).length > 0) {
@@ -68,31 +60,13 @@ const Page = () => {
             setErrors({});
             setLoading(true);
             try {
-                axios.post('https://app.romygo.com/api/v1/verify-otp', { phone: signup.phone, otp: form.otp })
+                axios.post('https://app.romygo.com/api/v1/verify-password-reset-otp', { email, otp: form.otp })
                     .then((res) => {
                         if (res.data.success) {
-
-                            axios.post('https://app.romygo.com/api/v1/register', postData)
-                                .then((res) => {
-                                    localStorage.setItem("signup", {})
-                                    setLoading(false);
-                                    if (res.data.success) {
-                                        showToast("success", "You are registered successfully");
-                                        // router.push('/');
-                                        router.push(`https://app.romygo.com/authenticate?token=${encodeURIComponent(res?.data?.data?.token)}`);
-                                        localStorage.setItem("user", JSON.stringify(res?.data?.data?.user));
-                                        localStorage.setItem("access_token", res?.data?.data?.token);
-                                        localStorage.setItem("isLoggedIn", true);
-                                    } else {
-                                        setLoading(false);
-                                        showToast("error", res.data.message || "Failed to sign up");
-                                    }
-                                }).catch((error) => {
-                                    setLoading(false);
-                                    showToast("error", error?.response?.data?.message || "An error occurred during sign up");
-                                    // Handle error (e.g., show a notification)
-                                    console.error("Error during sign up:", error);
-                                })
+                            localStorage.setItem("otp", form.otp);
+                            showToast("success", "OTP verified successfully");
+                            setLoading(false);
+                            router.push('/auth/reset-password');
                         } else {
                             setLoading(false);
                             showToast("error", res.data.message || "Failed to verify OTP");
@@ -115,7 +89,7 @@ const Page = () => {
     const handleResend = () => {
         setResendLoading(true);
         try {
-            axios.post('https://app.romygo.com/api/v1/send-otp', { phone: signup.phone })
+            axios.post('https://app.romygo.com/api/v1/forgot-password', { email: email })
                 .then((res) => {
                     console.log('res', res)
                     setResendLoading(false);
@@ -124,12 +98,15 @@ const Page = () => {
                         setSecondsLeft(duration);
                         setShowResend(false);
                     } else {
+                        setResendLoading(false);
                         showToast("error", res.data.message || "Failed to send OTP");
                     }
                 }).catch((error) => {
+                    setResendLoading(false);
                     console.error("Error during sign up:", error);
                 })
         } catch (error) {
+            setResendLoading(false);
             console.error("Error during sign up:", error);
             // Handle error (e.g., show a notification)
         }
@@ -152,8 +129,8 @@ const Page = () => {
 
                 <div className="form-box">
                     <div className="form-top">
-                        <h2>{t.driveWithRomygo}</h2>
-                        <p>{t.becomeRomygoDrivermakeMoreMoneyToday}</p>
+                        <h2>{t.forgotPassword}</h2>
+                        <p>{"Otp was sent to your email"}</p>
                     </div>
 
                     <form className="form-bottom" onSubmit={handleSubmit}>
@@ -189,14 +166,14 @@ const Page = () => {
                             type='submit'
                             className="submit-btn">
                             {isLoading ? <div class="spinner-border spinner-border-sm me-2"></div> : <i className="fas fa-check-circle me-2"></i>}
-                            {t.signUp}
+                            {"Submit"}
                         </button>
                     </form>
                 </div>
                 <AuthFooter />
             </div>
-            <div className="right-section">
-                <img src="/images/ban.jpg" alt="Sign Up" className="auth-image" />
+            <div className="right-section right-forgot">
+                <img src="/images/passwordReset.jpg" alt="Sign Up" className="auth-image" />
             </div>
         </div>
         <ToastContainer />

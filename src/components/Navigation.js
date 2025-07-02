@@ -8,6 +8,7 @@ const Navigation = ({ user = null }) => {
     const router = useRouter();
     const pathname = usePathname();
     const [isLogin, setLogin] = useState(false)
+    const [token, setToken] = useState("")
     const { language, changeLanguage, t } = useLanguage()
     const navItems = [
         { name: t.home, path: '/' },
@@ -26,6 +27,11 @@ const Navigation = ({ user = null }) => {
     useEffect(() => {
         localStorage.getItem("isLoggedIn") === "true" ? setLogin(true) : setLogin(false)
     }, [])
+    useEffect(() => {
+        if (isLogin) {
+            setToken(localStorage.getItem("access_token"))
+        }
+    }, [isLogin])
 
     return (
         <>
@@ -104,10 +110,45 @@ const Navigation = ({ user = null }) => {
                                 <a href onClick={() => router.push("/auth/login")} className="btn btn-outline-light btn-sm rounded-pill px-3 mt-2 mt-lg-0">{t.login}</a>
                                 <a href onClick={() => router.push("/auth/sign-up")} className="btn btn-yellow btn-sm rounded-pill px-3 text-dark mt-2 mt-lg-0">{t.signup}</a>
                             </>) : (
-                                <a href onClick={() => router.push("/dashboard")} >
-                                    <img src={user && user?.logo} alt="User Avatar" className="rounded-circle" width="32" height="32" />
-                                </a>
+                                <div className="dropdown">
+                                    <a href
+                                        data-bs-toggle="dropdown"
+                                    >
+                                        <img src={user && user?.logo || '/images/user.png'} alt="User Avatar" className="rounded-circle" width="32" height="32" />
+                                    </a>
+                                    <ul className="dropdown-menu dropdown-menu-dark">
+                                        <li>
+                                            <a
+                                                onClick={() => {
+                                                    router.push(`https://app.romygo.com/authenticate?token=${encodeURIComponent(token)}`)
+                                                }}
+                                                className="dropdown-item"
+                                                href
+                                            >
+                                                Dashboard
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                onClick={() => {
+                                                    handleLogout()
+                                                    router.push('/')
+                                                }}
+                                                className="dropdown-item"
+                                                href
+                                            >
+                                                Logout
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
                             )}
+                            {/* <a href
+                                onClick={() => router.push(`https://app.romygo.com/authenticate?token=${encodeURIComponent(token)}`)}
+                            >
+                                <img src={user && user?.logo || '/images/user.png'} alt="User Avatar" className="rounded-circle" width="32" height="32" />
+                            </a> */}
                             {/* <a href onClick={() => handleLogout()} className="btn btn-outline-light btn-sm rounded-pill px-3 mt-2 mt-lg-0">{t.logout}</a> */}
                         </div>
 
